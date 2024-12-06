@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>6-Month Anniversary</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #ffecd2, #fcb69f);
+      text-align: center;
+      color: #333;
+    }
+    h1 {
+      font-size: 3rem;
+      margin-top: 20px;
+    }
+    #timer {
+      font-size: 2rem;
+      margin: 20px 0;
+      color: #ff6363;
+    }
+    .message, .images {
+      margin: 20px;
+    }
+    .button-container button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      background-color: #ff7f7f;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .button-container button:hover {
+      background-color: #ff5252;
+    }
+    .images img {
+      width: 200px;
+      height: auto;
+      margin: 10px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    footer {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <h1>Happy 6-Month Anniversary!</h1>
+  
+  <!-- Countdown Timer -->
+  <div id="timer"></div>
+  
+  <!-- Custom Message -->
+  <div class="message">
+    <h2>Your Custom Message:</h2>
+    <p id="customMessage">"The past six months have been magical with you. Here's to many more months of love and joy together!"</p>
+    <button onclick="editMessage()">Edit Message</button>
+  </div>
+  
+  <!-- Picture Gallery -->
+  <div class="images">
+    <h2>Our Memories</h2>
+    <input type="file" id="uploadImage" accept="image/*" multiple onchange="previewImages()">
+    <div id="imageGallery"></div>
+  </div>
+  
+  <!-- Button Interactions -->
+  <div class="button-container">
+    <button onclick="showHearts()">💖 Spread Love</button>
+    <button onclick="confettiEffect()">🎉 Throw Confetti</button>
+  </div>
+  
+  <!-- Footer -->
+  <footer>
+    <p>Made with love for our special day 💕</p>
+  </footer>
+  
+  <script>
+    // Countdown Timer
+    const targetDate = new Date("2024-06-06T00:00:00").getTime();
+    const timerElement = document.getElementById("timer");
+    function updateTimer() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      timerElement.innerHTML = `Time left until 6-month anniversary: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+      if (distance < 0) {
+        clearInterval(timerInterval);
+        timerElement.innerHTML = "Happy 6-Month Anniversary! 🎉";
+      }
+    }
+    const timerInterval = setInterval(updateTimer, 1000);
+
+    // Edit Custom Message
+    function editMessage() {
+      const newMessage = prompt("Write your new message:");
+      if (
